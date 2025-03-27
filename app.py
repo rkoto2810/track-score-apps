@@ -134,6 +134,7 @@ with tab2:
         st.success("保存しました！")
 
 # ===== タブ3：記録一覧表示 =====
+# ===== タブ3：記録一覧表示 =====
 with tab3:
     st.subheader("保存された記録一覧")
     df = load_csv(CSV_FILE)
@@ -149,6 +150,7 @@ with tab3:
                 st.write(row.to_dict())
                 if st.button("❌ この記録を削除", key=f"delete_{i}"):
                     delete_row(i, CSV_FILE)
-                    st.success("削除しました。ページを手動で再読み込みしてください（画面左上の再実行ボタンで更新できます）")
+                    st.success("削除しました")
+                    st.experimental_rerun()  # ✅ 自動でページを再読み込み！
     else:
         st.info("まだ記録が保存されていません。")
