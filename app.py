@@ -3,6 +3,12 @@ import pandas as pd
 import os
 from datetime import date
 
+# ===== アプリUI =====
+st.set_page_config(page_title="得点計算アプリ", layout="wide")
+st.image("037DCF7B-ECED-422C-AABE-BD40863A0B37_1_201_a.jpeg", width=200)  # ← この行を追加！
+st.title("HappinessAC 得点計算アプリ")
+
+
 # ===== 設定 =====
 CSV_FILE = "score_data.csv"
 
