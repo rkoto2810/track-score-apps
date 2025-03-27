@@ -152,3 +152,27 @@ with tab3:
                     st.success("削除しました。ページを手動で再読み込みしてください（画面左上の再実行ボタンで更新できます）")
     else:
         st.info("まだ記録が保存されていません。")
+
+# ===== タブ4：記録削除 =====
+with tab4:
+    st.subheader("記録を名前で検索して削除")
+    df = load_csv(CSV_FILE)
+
+    if df.empty:
+        st.info("保存された記録がありません。")
+    else:
+        name_query = st.text_input("削除したい選手の名前を入力してください")
+        matched_df = df[df["名前"].str.contains(name_query, na=False)]
+
+        if matched_df.empty:
+            st.warning("該当する記録が見つかりませんでした。")
+        else:
+            for i, row in matched_df.iterrows():
+                with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']} | {row['日付']}"):
+                    st.write(row.to_dict())
+                    if st.button("この記録を削除", key=f"confirm_delete_{i}"):
+                        confirm = st.checkbox(f"本当に削除しますか？（{row['名前']} | {row['種目']}）", key=f"check_{i}")
+                        if confirm:
+                            df = df.drop(row.name).reset_index(drop=True)
+                            df.to_csv(CSV_FILE, index=False)
+                            st.success("記録を削除しました。ページを手動で再読み込みしてください。")
