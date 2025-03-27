@@ -136,7 +136,6 @@ with tab2:
 # ===== タブ3：記録一覧表示 =====
 with tab3:
     st.subheader("保存された記録一覧")
-
     df = load_csv(CSV_FILE)
 
     if not df.empty:
@@ -146,13 +145,10 @@ with tab3:
         st.subheader("削除したいデータを選んでください")
 
         for i, row in df.iterrows():
-    with st.expander(f\"{row['名前']} | {row['種目']} | {row['記録']}\"):
-        st.write(row.to_dict())
-        if st.button(\"❌ この記録を削除\", key=f\"delete_{i}\"):
-            delete_row(i, CSV_FILE)
-            st.success(\"削除しました。ページを手動で再読み込みしてください（画面左上の再実行ボタンで更新できます）\")
-
-
-
+            with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']}"):
+                st.write(row.to_dict())
+                if st.button("❌ この記録を削除", key=f"delete_{i}"):
+                    delete_row(i, CSV_FILE)
+                    st.success("削除しました。ページを手動で再読み込みしてください（画面左上の再実行ボタンで更新できます）")
     else:
         st.info("まだ記録が保存されていません。")
