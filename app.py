@@ -171,9 +171,12 @@ with tab4:
             for i, row in matched_df.iterrows():
                 with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']} | {row['日付']}"):
                     st.write(row.to_dict())
-                    if st.button("この記録を削除", key=f"confirm_delete_{i}"):
-                        confirm = st.checkbox(f"本当に削除しますか？（{row['名前']} | {row['種目']}）", key=f"check_{i}")
-                        if confirm:
+                    confirm = st.checkbox(
+                        f"本当に削除しますか？（{row['名前']} | {row['種目']}）", key=f"check_{i}"
+                    )
+                    if confirm:
+                        if st.button("この記録を削除", key=f"delete_{i}"):
                             df = df.drop(row.name).reset_index(drop=True)
                             df.to_csv(CSV_FILE, index=False)
                             st.success("記録を削除しました。ページを手動で再読み込みしてください。")
+
