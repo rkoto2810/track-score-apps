@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-st.image("037DCF7B-ECED-422C-AABE-BD40863A0B37_1_201_a.jpeg", width=200)
+st.image("037DCF7B-ECED-422C-AABE-BD40863A0B37_1_201_a.jpeg", width=400)
 st.title("HappinessAC 得点計算アプリ")
 
 # 得点計算関数（種目ごとの計算式）
