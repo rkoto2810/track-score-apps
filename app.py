@@ -168,15 +168,19 @@ with tab4:
         if matched_df.empty:
             st.warning("該当する記録が見つかりませんでした。")
         else:
-            for i, row in matched_df.iterrows():
+            for idx, row in matched_df.iterrows():
                 with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']} | {row['日付']}"):
                     st.write(row.to_dict())
+                    confirm_key = f"confirm_{idx}"
+                    button_key = f"delete_button_{idx}"
+
                     confirm = st.checkbox(
-                        f"本当に削除しますか？（{row['名前']} | {row['種目']}）", key=f"check_{i}"
+                        f"本当に削除しますか？（{row['名前']} | {row['種目']}）",
+                        key=confirm_key
                     )
+
                     if confirm:
-                        if st.button("この記録を削除", key=f"delete_{i}"):
+                        if st.button("この記録を削除", key=button_key):
                             df = df.drop(row.name).reset_index(drop=True)
                             df.to_csv(CSV_FILE, index=False)
                             st.success("記録を削除しました。ページを手動で再読み込みしてください。")
-
