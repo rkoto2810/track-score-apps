@@ -150,6 +150,6 @@ with tab3:
                 if st.button("❌ この記録を削除", key=f"delete_{i}"):
                     delete_row(i, CSV_FILE)
                     st.success("削除しました")
-                    st.experimental_rerun()  # ✅ 自動でページを再読み込み！
+                    st.experimental_rerun()  # 自動でページを再読み込み！
     else:
         st.info("まだ記録が保存されていません。")
