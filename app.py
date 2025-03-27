@@ -136,15 +136,21 @@ with tab2:
 # ===== タブ3：記録一覧表示 =====
 with tab3:
     st.subheader("保存された記録一覧")
+
     df = load_csv(CSV_FILE)
+
     if not df.empty:
+        st.dataframe(df, use_container_width=True)
+
+        st.markdown("---")
+        st.subheader("削除したいデータを選んでください")
+
         for i, row in df.iterrows():
-            col1, col2 = st.columns([6, 1])
-            with col1:
+            with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']}"):
                 st.write(row.to_dict())
-            with col2:
-                if st.button("削除", key=f"delete_{i}"):
+                if st.button("❌ この記録を削除", key=f"delete_{i}"):
                     delete_row(i, CSV_FILE)
+                    st.success("削除しました")
                     st.experimental_rerun()
     else:
         st.info("まだ記録が保存されていません。")
