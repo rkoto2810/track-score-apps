@@ -45,6 +45,12 @@ def load_csv(filename):
     else:
         return pd.DataFrame()
 
+# ===== CSVから指定行を削除 =====
+def delete_row(index, filename):
+    df = load_csv(filename)
+    df = df.drop(index).reset_index(drop=True)
+    df.to_csv(filename, index=False)
+
 # ===== アプリUI =====
 st.set_page_config(page_title="得点計算アプリ", layout="wide")
 st.title("HappinessAC 得点計算アプリ")
@@ -132,6 +138,13 @@ with tab3:
     st.subheader("保存された記録一覧")
     df = load_csv(CSV_FILE)
     if not df.empty:
-        st.dataframe(df, use_container_width=True)
+        for i, row in df.iterrows():
+            col1, col2 = st.columns([6, 1])
+            with col1:
+                st.write(row.to_dict())
+            with col2:
+                if st.button("削除", key=f"delete_{i}"):
+                    delete_row(i, CSV_FILE)
+                    st.experimental_rerun()
     else:
         st.info("まだ記録が保存されていません。")
