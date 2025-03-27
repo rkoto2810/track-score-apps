@@ -139,8 +139,11 @@ with tab3:
     st.subheader("保存された記録一覧")
     df = load_csv(CSV_FILE)
 
+    if not df.empty:
+        st.dataframe(df, use_container_width=True)
     else:
         st.info("まだ記録が保存されていません。")
+
 
 # ===== タブ4：記録削除 =====
 with tab4:
