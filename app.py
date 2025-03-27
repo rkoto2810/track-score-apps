@@ -149,8 +149,8 @@ with tab3:
             with st.expander(f"{row['名前']} | {row['種目']} | {row['記録']}"):
                 st.write(row.to_dict())
                 if st.button("❌ この記録を削除", key=f"delete_{i}"):
-                    delete_row(i, CSV_FILE)
-                    st.success("削除しました")
-                    st.experimental_rerun()
+    delete_row(i, CSV_FILE)
+    st.success("削除しました。ページを手動で再読み込みしてください（画面上部の再読み込みボタンをクリック）")
+
     else:
         st.info("まだ記録が保存されていません。")
