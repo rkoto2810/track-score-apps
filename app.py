@@ -57,9 +57,6 @@ def delete_row(index, filename):
     df = df.drop(index).reset_index(drop=True)
     df.to_csv(filename, index=False)
 
-# ===== アプリUI =====
-st.set_page_config(page_title="得点計算アプリ", layout="wide")
-st.title("HappinessAC 得点計算アプリ")
 
 # ===== タブ構成 =====
 tab1, tab2, tab3, tab4 = st.tabs(["📋 得点早見表", "🧮 得点計算・記録入力", "📂 記録一覧表示", "🗑️ 記録削除"])
