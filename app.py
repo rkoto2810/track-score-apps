@@ -1,3 +1,7 @@
+st.image("037DCF7B-ECED-422C-AABE-BD40863A0B37_1_201_a.jpeg", width=200)
+st.title("HappinessAC 得点計算アプリ")
+
+
 import streamlit as st
 import pandas as pd
 
